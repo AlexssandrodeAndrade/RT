@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Formulário RT</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <style>
+      fieldset {
+        border: 1px solid black;
+        padding: 1.5rem 1rem 1rem 1rem;
+        border-radius: 6px;
+        position: relative;
+        margin-bottom: 20px;
+      }
+
+      fieldset legend {
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 0 10px;
+        position: absolute;
+        top: -0.8rem;
+        left: 1rem;
+        background-color: greenyellow;
+        display: inline-block; /* ← ESSENCIAL */
+        width: auto; /* ← evita estourar a borda */
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mb-3">
+      <h2 class="text-center">Formulário RT com PDF local</h2>
+
+      <div class="row m-2 p-2">
+        <div class="col-6">
+          <div class="form-floating">
+            <input
+              class="form-control"
+              type="file"
+              id="pdfFile"
+              placeholder="PDF Modelo:"
+              value="D:\Arquivos\RT\RT.pdf"
+            />
+            <label for="pdfFile">PDF Modelo:</label>
+          </div>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-secondary" onclick="gerarPDF()">
+            Gerar PDF Preenchido
+          </button>
+        </div>
+      </div>
+
+      <fieldset id="fset1">
+        <legend>
+          Instituição Contratante (Inserir neste campo os dados da instituição
+          com quem o profissional possui contrato)
+        </legend>
+        <div class="row mb-1">
+          <div class="col-10">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset1_razao_social"
+                class="form-control"
+                placeholder="Razão Social:"
+                value="fset1_razao_social"
+              />
+              <label>Razão Social:</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset1_cnpj"
+                class="form-control"
+                placeholder="CNPJ:"
+                value="79.372.553/0001-25"
+              />
+              <label>CNPJ:</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-12">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset1_nome_fantasia"
+                class="form-control"
+                placeholder="Nome Fantasia:"
+                value="JOSE BOITEUX PREF GABINETE DO PREFEITO"
+              />
+              <label for="nomeFantasia">Nome Fantasia:</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset1_endereco"
+                class="form-control"
+                placeholder="Endereço:"
+                value="AV 26 DE ABRIL, Nº 655"
+              />
+              <label for="endereco">Endereço, Nº:</label>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset1_bairro"
+                class="form-control"
+                placeholder="Bairro:"
+                value="CENTRO"
+              />
+              <label>Bairro:</label>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset1_cep"
+                class="form-control"
+                placeholder="CEP:"
+                value="89.145-000"
+              />
+              <label>CEP:</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset1_cidade"
+                class="form-control"
+                placeholder="Cidade:"
+                value="JOSE BOITEUX"
+              />
+              <label>Cidade:</label>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset1_telelefone"
+                class="form-control"
+                placeholder="Telefone:"
+                value="(47) 3352-7111"
+              />
+              <label for="tel">Telefone:</label>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset1_email"
+                class="form-control"
+                placeholder="E-mail:"
+                value="CONTABILIDADE@PMJB.SC.GOV.BR"
+              />
+              <label>E-mail:</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-8">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset1_ramo"
+                class="form-control"
+                placeholder="Ramo de atividade:"
+                value="84.11-6-00 - Administração pública em geral"
+              />
+              <label>Ramo de atividade:</label>
+            </div>
+          </div>
+
+          <div class="col-4 mb-3">
+            <label class="form-label d-block mb-1">Natureza:</label>
+
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="fset1_natureza"
+                id="natPublica"
+                value="Pública"
+                checked
+              />
+              <label class="form-check-label" for="natPublica">Pública</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="fset1_natureza"
+                id="natPrivada"
+                value="Privada"
+              />
+              <label class="form-check-label" for="natPrivada">Privada</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="fset1_natureza"
+                id="natFilantropica"
+                value="Filantrópica"
+              />
+              <label class="form-check-label" for="natFilantropica"
+                >Filantrópica</label
+              >
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset id="fset2">
+        <legend>
+          Instituição de Atuação (Inserir neste campo os dados do local de
+          atuação. Caso seja a mesma instituição, repetir os dados)
+        </legend>
+
+        <div class="row mb-1">
+          <div class="col-10">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset2_razao_social"
+                class="form-control"
+                placeholder="Razão Social:"
+                value="fset2_razao_social"
+              />
+              <label>Razão Social:</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset2_cnpj"
+                class="form-control"
+                placeholder="CNPJ:"
+                value="79.372.553/0001-25"
+              />
+              <label>CNPJ:</label>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-7">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset2_nome_fantasia"
+                class="form-control"
+                placeholder="Nome Fantasia:"
+                value="fset2_nome_fantasia"
+              />
+              <label>Nome Fantasia:</label>
+            </div>
+          </div>
+          <div class="col-5">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset2_dptoUnidServicos"
+                class="form-control"
+                placeholder="Dpto./Unid. de Serviços:"
+                value="fset2_dptoUnidServicos"
+              />
+              <label>Dpto./Unid. de Serviços:</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset2_endereco"
+                class="form-control"
+                placeholder="Endereço, Nº:"
+                value="fset2_endereco"
+              />
+              <label>Endereço, Nº:</label>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset2_bairro"
+                class="form-control"
+                placeholder="Bairro:"
+                value="fset2_bairro"
+              />
+              <label>Bairro:</label>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset2_cep"
+                class="form-control"
+                placeholder="CEP:"
+                value="fset2_cep"
+              />
+              <label>CEP:</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset2_cidade"
+                class="form-control"
+                placeholder="Cidade:"
+                value="fset2_cidade"
+              />
+              <label>Cidade:</label>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset2_telefone"
+                class="form-control"
+                placeholder="Telefone:"
+                value="fset2_telefone"
+              />
+              <label>Telefone:</label>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="email"
+                id="fset2_email1"
+                class="form-control"
+                placeholder="E-mail:"
+                value="fset2_email1"
+              />
+              <label>E-mail:</label>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-8">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset2_horario_funcionamento"
+                class="form-control"
+                placeholder="Horário de funcionamento:"
+                value="fset2_horario_funcionamento"
+              />
+              <label>Horário de funcionamento:</label>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="email"
+                id="fset2_email2"
+                class="form-control"
+                placeholder="E-mail 2:"
+                value="fset2_email2"
+              />
+              <label>E-mail 2:</label>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-8">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset2_ramo_atividade"
+                class="form-control"
+                placeholder="Ramo de Atividade:"
+                value="fset2_ramo_atividade"
+              />
+              <label>Ramo de Atividade:</label>
+            </div>
+          </div>
+          <div class="col-4 mb-3">
+            <label class="form-label d-block mb-1">Natureza:</label>
+
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="fset2_natureza"
+                id="fset2_natPublica"
+                value="Pública"
+                checked
+              />
+              <label class="form-check-label" for="fset2_natPublica"
+                >Pública</label
+              >
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="fset2_natureza"
+                id="fset2_natPrivada"
+                value="Privada"
+              />
+              <label class="form-check-label" for="fset2_natPrivada"
+                >Privada</label
+              >
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="fset2_natureza"
+                id="fset2_natFilantropica"
+                value="Filantrópica"
+              />
+              <label class="form-check-label" for="fset2_natFilantropica"
+                >Filantrópica</label
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-1">
+            <label>Tipo de RT:</label>
+          </div>
+          <div class="col-11">
+            <div class="row">
+              <div class="col-3">
+                <input
+                  type="checkbox"
+                  name="fset2_rt_tipo"
+                  value="marcar_com_um_x"
+                  checked
+                />
+                <label> MARCAR COM UM X </label>
+              </div>
+
+              <div class="col-3">
+                <input
+                  type="checkbox"
+                  name="fset2_rt_tipo"
+                  value="rt_pgrss"
+                  checked
+                />
+                <label>RT PGRSS</label>
+              </div>
+
+              <div class="col-6">
+                <input
+                  type="checkbox"
+                  name="fset2_rt_tipo"
+                  value="rt_auditoria"
+                  checked
+                />
+                <label>RT Auditoria/Consultoria</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <input
+                  type="checkbox"
+                  name="fset2_rt_tipo"
+                  value="rt_ensino"
+                  checked
+                />
+                <label>RT Ensino/Docente</label>
+              </div>
+
+              <div class="col-3">
+                <input
+                  type="checkbox"
+                  name="fset2_rt_tipo"
+                  value="rt_assistencial"
+                  checked
+                />
+                <label>RT Assistencial</label>
+              </div>
+
+              <div class="col-6">
+                <input
+                  type="checkbox"
+                  name="fset2_rt_tipo"
+                  value="rt_equipamentos"
+                  checked
+                />
+                <label>
+                  RT Equipamentos/Materiais/Insumos Médicos-Hospitalares
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset id="fset3">
+        <legend>Responsável Técnico</legend>
+
+        <div class="row mb-2">
+          <div class="col-8">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="fset3_nome"
+                name="fset3_nome"
+                placeholder="Nome do(a) Enfermeiro(a):"
+              />
+              <label for="fset3_nome">Nome do(a) Enfermeiro(a):</label>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="fset3_coren"
+                name="fset3_coren"
+                placeholder="Inscrição no COREN-SC:"
+              />
+              <label for="fset3_coren">Inscrição no COREN-SC:</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-12">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="fset3_dias"
+                name="fset3_dias"
+                placeholder="Dias da Semana Trabalhados:"
+              />
+              <label for="fset3_dias">Dias da Semana Trabalhados:</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-8">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="fset3_horario"
+                name="fset3_horario"
+                placeholder="Horário de Trabalho:"
+              />
+              <label for="fset3_horario">Horário de Trabalho:</label>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="fset3_carga"
+                name="fset3_carga"
+                placeholder="Carga horária semanal:"
+              />
+              <label for="fset3_carga">Carga horária semanal:</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-8">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="fset3_endereco"
+                name="fset3_endereco"
+                placeholder="Endereço Residencial:"
+              />
+              <label for="fset3_endereco">Endereço Residencial:</label>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="fset3_bairro"
+                name="fset3_bairro"
+                placeholder="Bairro:"
+              />
+              <label for="fset3_bairro">Bairro:</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="fset3_cidade"
+                name="fset3_cidade"
+                placeholder="Cidade:"
+              />
+              <label for="fset3_cidade">Cidade:</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="fset3_cep"
+                name="fset3_cep"
+                placeholder="CEP:"
+              />
+              <label for="fset3_cep">CEP:</label>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="fset3_telefone"
+                name="fset3_telefone"
+                placeholder="Tel:"
+              />
+              <label for="fset3_telefone">Tel:</label>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-floating">
+              <input
+                type="email"
+                class="form-control"
+                id="fset3_email"
+                name="fset3_email"
+                placeholder="Email:"
+              />
+              <label for="fset3_email">Email:</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset id="fset4">
+        <legend>Outros vínculos profissionais</legend>
+
+        <div class="mb-3">
+          <label class="form-label d-block">Possui vínculo?</label>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="fset4_vinculo"
+              id="fset4_vinculo_nao"
+              value="nao"
+              checked
+            />
+            <label class="form-check-label" for="fset4_vinculo_nao">Não</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="fset4_vinculo"
+              id="fset4_vinculo_sim"
+              value="sim"
+            />
+            <label class="form-check-label" for="fset4_vinculo_sim">Sim</label>
+            <span class="ms-2">Se sim, preencha os campos abaixo:</span>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-8">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset4_nome_inst"
+                name="fset4_nome_inst"
+                class="form-control"
+                placeholder="Nome da Inst."
+              />
+              <label for="fset4_nome_inst">Nome da Inst.:</label>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset4_funcao"
+                name="fset4_funcao"
+                class="form-control"
+                placeholder="Função:"
+              />
+              <label for="fset4_funcao">Função:</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-6">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset4_endereco"
+                name="fset4_endereco"
+                class="form-control"
+                placeholder="Endereço:"
+              />
+              <label for="fset4_endereco">Endereço:</label>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset4_bairro"
+                name="fset4_bairro"
+                class="form-control"
+                placeholder="Bairro:"
+              />
+              <label for="fset4_bairro">Bairro:</label>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset4_cep"
+                name="fset4_cep"
+                class="form-control"
+                placeholder="CEP:"
+              />
+              <label for="fset4_cep">CEP:</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset4_cidade"
+                name="fset4_cidade"
+                class="form-control"
+                placeholder="Cidade:"
+              />
+              <label for="fset4_cidade">Cidade:</label>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset4_tel"
+                name="fset4_tel"
+                class="form-control"
+                placeholder="Tel:"
+              />
+              <label for="fset4_tel">Tel:</label>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="email"
+                id="fset4_email"
+                name="fset4_email"
+                class="form-control"
+                placeholder="E-mail:"
+              />
+              <label for="fset4_email">E-mail:</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-6">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset4_dias"
+                name="fset4_dias"
+                class="form-control"
+                placeholder="Dias da Semana Trabalhados:"
+              />
+              <label for="fset4_dias">Dias da Semana Trabalhados:</label>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset4_horario"
+                name="fset4_horario"
+                class="form-control"
+                placeholder="Horário de Trabalho:"
+              />
+              <label for="fset4_horario">Horário de Trabalho:</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset4_carga"
+                name="fset4_carga"
+                class="form-control"
+                placeholder="Carga horária semanal:"
+              />
+              <label for="fset4_carga">Carga horária semanal:</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset id="fset5">
+        <legend>
+          Representante legal da Empresa/Instituição ou Responsável pelo local
+          de atuação do RT
+        </legend>
+        <div class="row mb-2">
+          <div class="col-8">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset5_representante"
+                name="fset5_representante"
+                class="form-control"
+                placeholder="Nome do Representante legal:"
+              />
+              <label for="fset5_representante"
+                >Nome do Representante legal:</label
+              >
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset5_cargo"
+                name="fset5_cargo"
+                class="form-control"
+                placeholder="Cargo:"
+              />
+              <label for="fset5_cargo">Cargo:</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-6">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="fset5_cidade_data"
+                name="fset5_cidade_data"
+                class="form-control"
+                placeholder="Cidade:"
+              />
+              <label>Cidade:</label>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-floating">
+              <input
+                type="date"
+                id="fset5_data"
+                name="fset5_data"
+                class="form-control"
+                placeholder="Data:"
+              />
+              <label class="form-label d-block">Data:</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <script src="RT.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
