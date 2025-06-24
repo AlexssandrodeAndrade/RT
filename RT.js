@@ -357,78 +357,78 @@ async function preencherPDF(pdfDoc) {
 
     // Ajuste as coordenadas conforme posição no seu PDF:
     firstPage.drawText(fset3_nome, {
-      x: 130,
-      y: 495,
+      x: 125,
+      y: 418,
       size: fontSize,
       font,
       color: corFonte,
     });
     firstPage.drawText(fset3_coren, {
-      x: 450,
-      y: 495,
+      x: 475,
+      y: 418,
       size: fontSize,
       font,
       color: corFonte,
     });
     firstPage.drawText(fset3_dias, {
-      x: 170,
-      y: 481,
+      x: 135,
+      y: 405,
       size: fontSize,
       font,
       color: corFonte,
     });
     firstPage.drawText(fset3_horario, {
-      x: 140,
-      y: 467,
+      x: 98,
+      y: 392,
       size: fontSize,
       font,
       color: corFonte,
     });
     firstPage.drawText(fset3_carga, {
-      x: 470,
-      y: 467,
+      x: 520,
+      y: 392,
       size: fontSize,
       font,
       color: corFonte,
     });
     firstPage.drawText(fset3_endereco, {
-      x: 160,
-      y: 453,
+      x: 110,
+      y: 380,
       size: fontSize,
       font,
       color: corFonte,
     });
     firstPage.drawText(fset3_bairro, {
-      x: 470,
-      y: 453,
+      x: 448,
+      y: 380,
       size: fontSize,
       font,
       color: corFonte,
     });
     firstPage.drawText(fset3_cidade, {
-      x: 100,
-      y: 439,
+      x: 55,
+      y: 367,
       size: fontSize,
       font,
       color: corFonte,
     });
     firstPage.drawText(fset3_cep, {
-      x: 270,
-      y: 439,
+      x: 210,
+      y: 367,
       size: fontSize,
       font,
       color: corFonte,
     });
     firstPage.drawText(fset3_telefone, {
-      x: 350,
-      y: 439,
+      x: 303,
+      y: 367,
       size: fontSize,
       font,
       color: corFonte,
     });
     firstPage.drawText(fset3_email, {
-      x: 460,
-      y: 439,
+      x: 415,
+      y: 367,
       size: fontSize,
       font,
       color: corFonte,
@@ -457,14 +457,14 @@ async function preencherPDF(pdfDoc) {
       // Posicione conforme sua folha (estimado com base na imagem):
       firstPage.drawText(fset4_nome_inst, {
         x: 130,
-        y: 412,
+        y: 300,
         size: fontSize,
         font,
         color: corFonte,
       });
       firstPage.drawText(fset4_funcao, {
         x: 455,
-        y: 412,
+        y: 300,
         size: fontSize,
         font,
         color: corFonte,
@@ -472,21 +472,21 @@ async function preencherPDF(pdfDoc) {
 
       firstPage.drawText(fset4_endereco, {
         x: 85,
-        y: 398,
+        y: 280,
         size: fontSize,
         font,
         color: corFonte,
       });
       firstPage.drawText(fset4_bairro, {
         x: 395,
-        y: 398,
+        y: 280,
         size: fontSize,
         font,
         color: corFonte,
       });
       firstPage.drawText(fset4_cep, {
         x: 505,
-        y: 398,
+        y: 280,
         size: fontSize,
         font,
         color: corFonte,
@@ -494,21 +494,21 @@ async function preencherPDF(pdfDoc) {
 
       firstPage.drawText(fset4_cidade, {
         x: 55,
-        y: 384,
+        y: 270,
         size: fontSize,
         font,
         color: corFonte,
       });
       firstPage.drawText(fset4_tel, {
         x: 240,
-        y: 384,
+        y: 270,
         size: fontSize,
         font,
         color: corFonte,
       });
       firstPage.drawText(fset4_email, {
         x: 390,
-        y: 384,
+        y: 270,
         size: fontSize,
         font,
         color: corFonte,
@@ -516,21 +516,21 @@ async function preencherPDF(pdfDoc) {
 
       firstPage.drawText(fset4_dias, {
         x: 185,
-        y: 370,
+        y: 255,
         size: fontSize,
         font,
         color: corFonte,
       });
       firstPage.drawText(fset4_horario, {
         x: 130,
-        y: 356,
+        y: 240,
         size: fontSize,
         font,
         color: corFonte,
       });
       firstPage.drawText(fset4_carga, {
         x: 470,
-        y: 356,
+        y: 240,
         size: fontSize,
         font,
         color: corFonte,
@@ -540,8 +540,8 @@ async function preencherPDF(pdfDoc) {
     // Marcar X na opção Sim/Não
     if (fset4_vinculo === "sim") {
       firstPage.drawText("X", {
-        x: 88,
-        y: 311,
+        x: 81,
+        y: 312,
         size: fontSize,
         font,
         color: corFonte,
@@ -561,53 +561,60 @@ async function preencherPDF(pdfDoc) {
     // --- Fieldset 5: Representante legal da Empresa/Instituição ---
     const fset5_representante = get("fset5_representante");
     const fset5_cargo = get("fset5_cargo");
-    const fset5_cidade_data = get("fset5_cidade_data");
-    const fset5_dia = get("fset5_dia");
-    const fset5_mes = get("fset5_mes");
-    const fset5_ano = get("fset5_ano");
+    const fset5_cidade = get("fset5_cidade");
+    const fset5_data = get("fset5_data");
+
+    let fset5_dia = "";
+    let fset5_mes = "";
+    let fset5_ano = "";
+
+    if (fset5_data) {
+      const data = new Date(fset5_data);
+
+      fset5_dia = data.getDate().toString(); // 24
+      fset5_mes = data.toLocaleDateString("pt-BR", { month: "long" }); // julho
+      fset5_ano = data.getFullYear().toString(); // 2025
+    }
 
     // Desenhar os campos (coordenadas estimadas com base na imagem)
     firstPage.drawText(fset5_representante, {
-      x: 170,
-      y: 320,
+      x: 135,
+      y: 156,
       size: fontSize,
       font,
       color: corFonte,
     });
-
     firstPage.drawText(fset5_cargo, {
-      x: 480,
-      y: 320,
+      x: 450,
+      y: 156,
       size: fontSize,
       font,
       color: corFonte,
     });
-
-    // Data: Cidade, dia, mês, ano
-    firstPage.drawText(fset5_cidade_data, {
-      x: 190,
-      y: 292,
+    firstPage.drawText(fset5_cidade, {
+      x: 360,
+      y: 120,
       size: fontSize,
       font,
       color: corFonte,
     });
     firstPage.drawText(fset5_dia, {
-      x: 310,
-      y: 292,
+      x: 445,
+      y: 120,
       size: fontSize,
       font,
       color: corFonte,
     });
     firstPage.drawText(fset5_mes, {
-      x: 375,
-      y: 292,
+      x: 478,
+      y: 120,
       size: fontSize,
       font,
       color: corFonte,
     });
     firstPage.drawText(fset5_ano, {
-      x: 475,
-      y: 292,
+      x: 550,
+      y: 120,
       size: fontSize,
       font,
       color: corFonte,
