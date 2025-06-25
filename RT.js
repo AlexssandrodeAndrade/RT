@@ -44,7 +44,7 @@ async function preencherPDF(pdfDoc) {
     const fset1_cep = get("fset1_cep");
     const fset1_cidade = get("fset1_cidade");
     const fset1_telelefo = get("fset1_telefone");
-    const fset1_ramo = get("fset1_ramo");
+    const fset1_ramo_atividade = get("fset1_ramo_atividade");
     const fset1_bairro = get("fset1_bairro");
     const fset1_email = get("fset1_email");
 
@@ -134,7 +134,7 @@ async function preencherPDF(pdfDoc) {
       font,
       color: corFonte,
     });
-    firstPage.drawText(fset1_ramo, {
+    firstPage.drawText(fset1_ramo_atividade, {
       x: 90,
       y: 630,
       size: fontSize,
@@ -157,7 +157,7 @@ async function preencherPDF(pdfDoc) {
     const fset2_razao_social = get("fset2_razao_social");
     const fset2_cnpj = get("fset2_cnpj");
     const fset2_nome_fantasia = get("fset2_nome_fantasia");
-    const fset2_dptoUnidServicos = get("fset2_dptoUnidServicos");
+    const fset2_dpto_unid_servico = get("fset2_dpto_unid_servico");
     const fset2_endereco = get("fset2_endereco");
     const fset2_bairro = get("fset2_bairro");
     const fset2_cep = get("fset2_cep");
@@ -260,7 +260,7 @@ async function preencherPDF(pdfDoc) {
       font,
       color: corFonte,
     });
-    firstPage.drawText(fset2_dptoUnidServicos, {
+    firstPage.drawText(fset2_dpto_unid_servico, {
       x: 390,
       y: 578,
       size: fontSize,
@@ -345,10 +345,10 @@ async function preencherPDF(pdfDoc) {
   if (1 === 1) {
     const fset3_nome = get("fset3_nome");
     const fset3_coren = get("fset3_coren");
-    const fset3_dias = get("fset3_dias");
-    const fset3_horario = get("fset3_horario");
-    const fset3_carga = get("fset3_carga");
-    const fset3_endereco = get("fset3_endereco");
+    const fset3_dias_semana = get("fset3_dias_semana");
+    const fset3_horario_trabalho = get("fset3_horario_trabalho");
+    const fset3_carga_horaria_semanal = get("fset3_carga_horaria_semanal");
+    const fset3_endereco_residencial = get("fset3_endereco_residencial");
     const fset3_bairro = get("fset3_bairro");
     const fset3_cidade = get("fset3_cidade");
     const fset3_cep = get("fset3_cep");
@@ -370,29 +370,29 @@ async function preencherPDF(pdfDoc) {
       font,
       color: corFonte,
     });
-    firstPage.drawText(fset3_dias, {
+    firstPage.drawText(fset3_dias_semana, {
       x: 135,
       y: 405,
       size: fontSize,
       font,
       color: corFonte,
     });
-    firstPage.drawText(fset3_horario, {
+    firstPage.drawText(fset3_horario_trabalho, {
       x: 98,
       y: 392,
       size: fontSize,
       font,
       color: corFonte,
     });
-    firstPage.drawText(fset3_carga, {
+    firstPage.drawText(fset3_carga_horaria_semanal, {
       x: 520,
       y: 392,
       size: fontSize,
       font,
       color: corFonte,
     });
-    firstPage.drawText(fset3_endereco, {
-      x: 110,
+    firstPage.drawText(fset3_endereco_residencial, {
+      x: 103,
       y: 380,
       size: fontSize,
       font,
@@ -448,45 +448,45 @@ async function preencherPDF(pdfDoc) {
       const fset4_bairro = get("fset4_bairro");
       const fset4_cep = get("fset4_cep");
       const fset4_cidade = get("fset4_cidade");
-      const fset4_tel = get("fset4_tel");
+      const fset4_telefone = get("fset4_telefone");
       const fset4_email = get("fset4_email");
-      const fset4_dias = get("fset4_dias");
-      const fset4_horario = get("fset4_horario");
+      const fset4_dias_semana_trabalhado = get("fset4_dias_semana_trabalhado");
+      const fset4_horario_trabalho = get("fset4_horario_trabalho");
       const fset4_carga = get("fset4_carga");
 
       // Posicione conforme sua folha (estimado com base na imagem):
       firstPage.drawText(fset4_nome_inst, {
-        x: 130,
-        y: 300,
+        x: 75,
+        y: 295,
         size: fontSize,
         font,
         color: corFonte,
       });
       firstPage.drawText(fset4_funcao, {
-        x: 455,
-        y: 300,
+        x: 375,
+        y: 295,
         size: fontSize,
         font,
         color: corFonte,
       });
 
       firstPage.drawText(fset4_endereco, {
-        x: 85,
-        y: 280,
+        x: 65,
+        y: 282,
         size: fontSize,
         font,
         color: corFonte,
       });
       firstPage.drawText(fset4_bairro, {
-        x: 395,
-        y: 280,
+        x: 335,
+        y: 282,
         size: fontSize,
         font,
         color: corFonte,
       });
       firstPage.drawText(fset4_cep, {
-        x: 505,
-        y: 280,
+        x: 485,
+        y: 282,
         size: fontSize,
         font,
         color: corFonte,
@@ -499,38 +499,38 @@ async function preencherPDF(pdfDoc) {
         font,
         color: corFonte,
       });
-      firstPage.drawText(fset4_tel, {
-        x: 240,
+      firstPage.drawText(fset4_telefone, {
+        x: 230,
         y: 270,
         size: fontSize,
         font,
         color: corFonte,
       });
       firstPage.drawText(fset4_email, {
-        x: 390,
+        x: 370,
         y: 270,
         size: fontSize,
         font,
         color: corFonte,
       });
 
-      firstPage.drawText(fset4_dias, {
-        x: 185,
-        y: 255,
+      firstPage.drawText(fset4_dias_semana_trabalhado, {
+        x: 135,
+        y: 256,
         size: fontSize,
         font,
         color: corFonte,
       });
-      firstPage.drawText(fset4_horario, {
-        x: 130,
-        y: 240,
+      firstPage.drawText(fset4_horario_trabalho, {
+        x: 100,
+        y: 245,
         size: fontSize,
         font,
         color: corFonte,
       });
       firstPage.drawText(fset4_carga, {
-        x: 470,
-        y: 240,
+        x: 520,
+        y: 245,
         size: fontSize,
         font,
         color: corFonte,
